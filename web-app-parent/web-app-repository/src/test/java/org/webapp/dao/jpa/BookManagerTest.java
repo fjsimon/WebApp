@@ -28,7 +28,7 @@ public class BookManagerTest {
     @Test
     public void selectBook(){
 
-        List<Book> books = bookManager.getAll();
+        List<Book> books = bookManager.findAll();
         assertThat(books, is(not(nullValue())));
     }
 

@@ -15,6 +15,7 @@ import org.webapp.dao.config.DbConfig;
 import org.webapp.model.Book;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -57,7 +58,11 @@ public class BookDaoTest {
     @Test
     public void getBook(){
 
-        Book book = bookDao.get(Book.class, Long.valueOf(123456));
+        List<Book> books = bookDao.getAll();
+        int random = ThreadLocalRandom.current().nextInt(0, books.size() + 1);
+        Long id = books.get(random).getId();
+
+        Book book = bookDao.get(Book.class, id);
         assertThat(book, is(not(nullValue())));
     }
 

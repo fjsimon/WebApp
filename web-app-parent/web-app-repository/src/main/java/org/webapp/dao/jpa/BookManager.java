@@ -7,7 +7,7 @@ import org.webapp.model.Book;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-public class BookManager extends GenericManager<Book, Long> implements BookDao {
+public class BookManager extends GenericRepositoryManager<Book, Long> {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -17,9 +17,9 @@ public class BookManager extends GenericManager<Book, Long> implements BookDao {
         super(Book.class);
     }
 
-    @Override
-    public Book save(Book b) {
-        return entityManager.merge(b);
-    }
+//    @Override
+//    public Book save(Book b) {
+//        return entityManager.merge(b);
+//    }
 
 }

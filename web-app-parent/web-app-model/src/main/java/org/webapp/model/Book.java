@@ -8,15 +8,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "repository.Book")
-public class Book implements Serializable {
-
-    /**
-     *
-     */
-    private static final long serialVersionUID = -3476936475623063326L;
-
-    @Id
-    private long id;
+public class Book extends Identity {
 
     private String title;
     private String subtitle;
@@ -31,12 +23,6 @@ public class Book implements Serializable {
     private String image;
     private String download;
 
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
     public String getTitle() {
         return title;
     }
@@ -100,7 +86,7 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "Book [id=" + id + ", title=" + title + ", subtitle=" + subtitle
+        return "Book [id=" + getId() + ", title=" + title + ", subtitle=" + subtitle
                 + ", description=" + description + ", author=" + author
                 + ", isbn=" + isbn + ", page=" + page + ", year=" + year
                 + ", publisher=" + publisher + ", image=" + image
@@ -116,7 +102,7 @@ public class Book implements Serializable {
                 + ((description == null) ? 0 : description.hashCode());
         result = prime * result
                 + ((download == null) ? 0 : download.hashCode());
-        result = prime * result + (int) (id ^ (id >>> 32));
+        result = prime * result + (int) (getId() ^ (getId() >>> 32));
         result = prime * result + ((image == null) ? 0 : image.hashCode());
         result = prime * result + (int) (isbn ^ (isbn >>> 32));
         result = prime * result + page;
@@ -151,7 +137,7 @@ public class Book implements Serializable {
                 return false;
         } else if (!download.equals(other.download))
             return false;
-        if (id != other.id)
+        if (getId() != other.getId())
             return false;
         if (image == null) {
             if (other.image != null)
