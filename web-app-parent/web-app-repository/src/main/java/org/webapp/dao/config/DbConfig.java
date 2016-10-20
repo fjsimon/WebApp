@@ -44,6 +44,8 @@ public class DbConfig {
 
     @Bean(name = "hibernateProperties")
     public Properties getHibernateProperties() {
+
+        log.debug("Hibernate Properties");
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         hibernateProperties.put("hibernate.show_sql", true);
@@ -52,6 +54,8 @@ public class DbConfig {
         hibernateProperties.put("hibernate.hbm2ddl.auto", "update");
         hibernateProperties.put("hibernate.use_sql_comments", false);
         hibernateProperties.put("hibernate.connection.pool_size", 1);
+//        hibernateProperties.put("hibernate.search.default.directory_provider", "filesystem");
+//        hibernateProperties.put("hibernate.search.default.indexBase", "/var/lucene/indexes");
         return hibernateProperties;
     }
 

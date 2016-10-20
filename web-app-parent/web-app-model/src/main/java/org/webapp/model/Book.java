@@ -1,20 +1,30 @@
 package org.webapp.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Objects;
 
+//@Indexed
 @Entity
 @Table(name = "repository.Book")
 public class Book extends Identity {
 
+//    @Field
     private String title;
+
+//    @Field
     private String subtitle;
 
+//    @Field
     @Column(length = 1000)
     private String description;
+
     private String author;
     private long isbn;
     private int page;
@@ -95,74 +105,49 @@ public class Book extends Identity {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((author == null) ? 0 : author.hashCode());
-        result = prime * result
-                + ((description == null) ? 0 : description.hashCode());
-        result = prime * result
-                + ((download == null) ? 0 : download.hashCode());
-        result = prime * result + (int) (getId() ^ (getId() >>> 32));
-        result = prime * result + ((image == null) ? 0 : image.hashCode());
-        result = prime * result + (int) (isbn ^ (isbn >>> 32));
-        result = prime * result + page;
-        result = prime * result
-                + ((subtitle == null) ? 0 : subtitle.hashCode());
-        result = prime * result + ((title == null) ? 0 : title.hashCode());
-        result = prime * result + year;
-        return result;
+
+//        return Objects.hashCode(this);
+
+        return new HashCodeBuilder()
+                .append(author)
+                .append(description)
+                .append(download)
+                .append(getId())
+                .append(image)
+                .append(isbn)
+                .append(page)
+                .append(subtitle)
+                .append(title)
+                .append(year)
+                .toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
+
+//        return Objects.equals(this, obj);
+
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() == obj.getClass()) {
+            Book other = (Book) obj;
+            return new EqualsBuilder()
+                    .append(author, other.author)
+                    .append(description, other.description)
+                    .append(download, other.download)
+                    .append(getId(), other.getId())
+                    .append(image, other.image)
+                    .append(isbn, other.isbn)
+                    .append(page, other.page)
+                    .append(publisher, other.publisher)
+                    .append(subtitle, other.subtitle)
+                    .append(title, other.title)
+                    .append(year, other.year)
+                    .isEquals();
+
+        } else {
             return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Book other = (Book) obj;
-        if (author == null) {
-            if (other.author != null)
-                return false;
-        } else if (!author.equals(other.author))
-            return false;
-        if (description == null) {
-            if (other.description != null)
-                return false;
-        } else if (!description.equals(other.description))
-            return false;
-        if (download == null) {
-            if (other.download != null)
-                return false;
-        } else if (!download.equals(other.download))
-            return false;
-        if (getId() != other.getId())
-            return false;
-        if (image == null) {
-            if (other.image != null)
-                return false;
-        } else if (!image.equals(other.image))
-            return false;
-        if (isbn != other.isbn)
-            return false;
-        if (page != other.page)
-            return false;
-        if (publisher != other.publisher)
-            return false;
-        if (subtitle == null) {
-            if (other.subtitle != null)
-                return false;
-        } else if (!subtitle.equals(other.subtitle))
-            return false;
-        if (title == null) {
-            if (other.title != null)
-                return false;
-        } else if (!title.equals(other.title))
-            return false;
-        if (year != other.year)
-            return false;
-        return true;
+        }
     }
 
 }

@@ -1,6 +1,8 @@
 package org.webapp.model;
 
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -26,31 +28,29 @@ public class Books implements Serializable {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((books == null) ? 0 : books.hashCode());
-        return result;
+        return new HashCodeBuilder()
+                .append(books)
+                .toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() == obj.getClass()) {
+            Books other = (Books) obj;
+            return new EqualsBuilder()
+                    .append(books, other.books)
+                    .isEquals();
+
+        } else {
             return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Books other = (Books) obj;
-        if (books == null) {
-            if (other.books != null)
-                return false;
-        } else if (!books.equals(other.books))
-            return false;
-        return true;
+        }
     }
 
     @Override
     public String toString() {
+
         return "Books [books=" + books + "]";
     }
 

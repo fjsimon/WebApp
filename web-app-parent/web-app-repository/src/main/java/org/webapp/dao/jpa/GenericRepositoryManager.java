@@ -3,6 +3,7 @@ package org.webapp.dao.jpa;
 
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.webapp.model.Book;
@@ -114,7 +115,7 @@ public class GenericRepositoryManager<T extends Identity, PK extends Serializabl
     @Override
     public <S extends T> S save(S s) {
 
-        if (Optional.of(s.getId()).isPresent()) {
+        if (Optional.ofNullable(s.getId()).isPresent()) {
             // Updating
             return entityManager.merge(s);
         } else {
@@ -133,7 +134,7 @@ public class GenericRepositoryManager<T extends Identity, PK extends Serializabl
     @Override
     public boolean exists(PK pk) {
 
-        Optional optional = Optional.of(findOne(pk));
+        Optional optional = Optional.ofNullable(findOne(pk));
         return optional.isPresent();
     }
 
