@@ -1,14 +1,12 @@
 package org.webapp.dao.hibernate;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import org.webapp.dao.BookDao;
+import org.springframework.transaction.annotation.Transactional;
 import org.webapp.model.Book;
 
 @Repository
+@Transactional
 public class BookDaoHibernate extends GenericDaoHibernate<Book, Long> implements BookDao{
 
 

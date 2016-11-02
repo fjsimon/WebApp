@@ -1,17 +1,17 @@
-package org.webapp.dao.hibernate;
-
+package org.webapp.dao;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.webapp.dao.BookDao;
 import org.webapp.dao.config.AppConfig;
 import org.webapp.dao.config.DbConfig;
+import org.webapp.dao.hibernate.BookDao;
 import org.webapp.model.Book;
 
 import java.util.List;
@@ -22,10 +22,11 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.nullValue;
 
+@SpringBootTest
 @ActiveProfiles({"hibernate", "test"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {AppConfig.class, DbConfig.class})
-public class BookDaoTest {
+public class BookDaoIntegrationTest {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -70,4 +71,5 @@ public class BookDaoTest {
     public void exists(){
         assertThat(bookDao.exits(Book.class, Long.valueOf(RandomStringUtils.randomNumeric(10))), is(false));
     }
+
 }

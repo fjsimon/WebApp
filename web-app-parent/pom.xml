@@ -9,12 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>web-app-parent</artifactId>
+    <name>WebApp Modules Project</name>
     <packaging>pom</packaging>
-    <name>WebApp Parent</name>
 
     <modules>
         <module>web-app-model</module>
         <module>web-app-repository</module>
+        <module>web-app-repository-integration-test</module>
         <module>web-app-service</module>
         <module>web-app-controller</module>
     </modules>

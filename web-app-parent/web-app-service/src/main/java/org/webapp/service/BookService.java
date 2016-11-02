@@ -5,7 +5,7 @@ import org.webapp.model.Book;
 
 
 @Component
-public interface BookManager extends GenericManager<Book, Long> {
+public interface BookService extends GenericService<Book, Long> {
 
 	Book save(Book book);
 	

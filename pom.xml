@@ -44,6 +44,10 @@
 					<targetTests>
 						<param>org.webapp.*</param>
 					</targetTests>
+					<timestampedReports>false</timestampedReports>
+					<outputFormats>
+						<outputFormat>HTML</outputFormat>
+					</outputFormats>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -92,31 +96,27 @@
 		<pitest.version>1.1.10</pitest.version>
 	</properties>
 
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.pitest</groupId>
-				<artifactId>pitest-maven</artifactId>
-				<version>${pitest.version}</version>
-				<configuration>
-					<skip>false</skip>
-					<reportsDirectory>${project.build.directory}/pit-output-dir</reportsDirectory>
-					<sourceDataFormats>
-						<sourceDataFormat>HTML</sourceDataFormat>
-					</sourceDataFormats>
-					<siteReportName>WebApp_pit_report</siteReportName>
-					<siteReportDescription>pit description</siteReportDescription>
-					<siteReportDirectory>pit-site-directory</siteReportDirectory>
-				</configuration>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>report</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
-		</plugins>
-	</reporting>
+	<profiles>
+		<profile>
+			<id>pit</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-maven</artifactId>
+						<version>${pitest.version}</version>
+						<executions>
+							<execution>
+								<phase>test</phase>
+								<goals>
+									<goal>mutationCoverage</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>

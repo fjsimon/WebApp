@@ -1,4 +1,4 @@
-package org.webapp.dao;
+package org.webapp.dao.hibernate;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,9 +1,8 @@
 package org.webapp.dao.jpa;
 
-
+import jdk.nashorn.internal.runtime.regexp.joni.encoding.ObjPtr;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.webapp.model.Book;
@@ -39,7 +38,8 @@ public class GenericRepositoryManager<T extends Identity, PK extends Serializabl
     @Override
     public List<T> findAll() {
 
-        return entityManager.createQuery("Select t from " + persistentClass.getSimpleName() + " t").getResultList();
+        String modelClass = persistentClass.getSimpleName();
+        return entityManager.createQuery("Select t from " + modelClass + " t").getResultList();
     }
 
     @Override
@@ -115,7 +115,7 @@ public class GenericRepositoryManager<T extends Identity, PK extends Serializabl
     @Override
     public <S extends T> S save(S s) {
 
-        if (Optional.ofNullable(s.getId()).isPresent()) {
+        if (exists((PK) s.getId())) {
             // Updating
             return entityManager.merge(s);
         } else {
@@ -190,5 +190,10 @@ public class GenericRepositoryManager<T extends Identity, PK extends Serializabl
     public <S extends T> boolean exists(Example<S> example) {
 
         return false;
+    }
+
+    public EntityManager getEntityManager() {
+
+        return entityManager;
     }
 }

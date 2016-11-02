@@ -8,4 +8,5 @@ import org.webapp.model.Book;
 @Transactional
 public interface BookManager extends GenericRepository<Book, Long> {
 
+    Book update(Book book);
 }

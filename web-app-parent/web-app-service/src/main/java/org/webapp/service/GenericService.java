@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-import org.webapp.dao.GenericDao;
+import org.webapp.dao.hibernate.GenericDao;
 
 
 /**
@@ -20,7 +20,7 @@ import org.webapp.dao.GenericDao;
  */
 
 @Component
-public interface GenericManager<T, PK extends Serializable> {
+public interface GenericService<T, PK extends Serializable> {
 
     /**
      * Generic method used to get all objects of a particular type. This

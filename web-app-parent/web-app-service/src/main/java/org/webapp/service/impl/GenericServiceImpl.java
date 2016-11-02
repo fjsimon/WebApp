@@ -7,8 +7,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
-import org.webapp.dao.GenericDao;
-import org.webapp.service.GenericManager;
+import org.webapp.dao.hibernate.GenericDao;
+import org.webapp.service.GenericService;
 
 
 /**
@@ -46,7 +46,7 @@ import org.webapp.service.GenericManager;
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
 @Service
-public class GenericManagerImpl<T, PK extends Serializable> implements GenericManager<T, PK> {
+public class GenericServiceImpl<T, PK extends Serializable> implements GenericService<T, PK> {
     /**
      * Log variable for all child classes. Uses LogFactory.getLog(getClass()) from Commons Logging
      */
@@ -57,9 +57,9 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
      */
     protected GenericDao<T, PK> dao;
 
-    public GenericManagerImpl() { }
+    public GenericServiceImpl() { }
 
-    public GenericManagerImpl(GenericDao<T, PK> genericDao) {
+    public GenericServiceImpl(GenericDao<T, PK> genericDao) {
         this.dao = genericDao;
     }
 

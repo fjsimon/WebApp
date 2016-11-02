@@ -1,4 +1,4 @@
-package org.webapp.dao;
+package org.webapp.dao.hibernate;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
