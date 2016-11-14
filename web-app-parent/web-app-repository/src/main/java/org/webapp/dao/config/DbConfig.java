@@ -18,14 +18,17 @@ import java.util.Properties;
 
 @Configuration
 @Import({DbConfigHibernate.class, DbConfigJpa.class})
-@EnableConfigurationProperties(value = DataSourceProperties.class)
+@EnableConfigurationProperties(value = {DataSourceProperties.class, LiquibaseProperties.class})
 @PropertySource("file:application.properties")
 public class DbConfig {
 
-    private static final Logger log = Logger.getLogger(DbConfig.class);
+    private static final Logger LOGGER = Logger.getLogger(DbConfig.class);
 
     @Autowired
     private DataSourceProperties dataSourceProperties;
+
+    @Autowired
+    private LiquibaseProperties liquibaseProperties;
 
     @Autowired
     private Environment env;
@@ -33,7 +36,7 @@ public class DbConfig {
     @Bean(name = "dataSource")
     public DataSource getDatasourceConfiguration() {
 
-        log.debug("Configuring DataSource");
+        LOGGER.debug("Configuring DataSource");
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(dataSourceProperties.getDriverClassName());
         dataSource.setUrl(dataSourceProperties.getUrl());
@@ -45,7 +48,7 @@ public class DbConfig {
     @Bean(name = "hibernateProperties")
     public Properties getHibernateProperties() {
 
-        log.debug("Hibernate Properties");
+        LOGGER.debug("Hibernate Properties");
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         hibernateProperties.put("hibernate.show_sql", true);
@@ -59,13 +62,14 @@ public class DbConfig {
         return hibernateProperties;
     }
 
-//    @Bean(name = "liquibase")
-//    public SpringLiquibase liquibase(DataSource dataSource) {
-//        log.debug("Configuring Liquibase");
-//        SpringLiquibase liquibase = new SpringLiquibase();
-//        liquibase.setDataSource(dataSource);
-//        liquibase.setChangeLog("classpath:/src/main/resources/liquibase/master.xml");
-//        liquibase.setContexts("development, production");
-//        return liquibase;
-//    }
+    @Bean(name = "liquibase")
+    public SpringLiquibase liquibase(DataSource dataSource) {
+        LOGGER.debug("Configuring Liquibase");
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setDataSource(dataSource);
+        liquibase.setChangeLog(liquibaseProperties.getChangeLog());
+        liquibase.setContexts(liquibaseProperties.getContexts());
+        liquibase.setDropFirst(liquibaseProperties.isDropFirst());
+        return liquibase;
+    }
 }
