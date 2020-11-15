@@ -39,19 +39,19 @@ public class BookDaoIntegrationTest {
     @Test
     public void selectBook(){
 
-//        Book book = new Book();
-//        book.setAuthor("Fran");
-//        book.setDescription("Description");
-//        book.setId(123456);
-//        book.setDownload("download");
-//        book.setImage("image url");
-//        book.setIsbn(12345678);
-//        book.setPublisher("publisher");
-//        book.setSubtitle("subtitle");
-//        book.setTitle("title");
-//        book.setYear(2000);
-//
-//        bookDao.save(book);
+        Book book = new Book();
+        book.setAuthor("Fran");
+        book.setDescription("Description");
+        book.setId(123456L);
+        book.setDownload("download");
+        book.setImage("image url");
+        book.setIsbn(12345678);
+        book.setPublisher("publisher");
+        book.setSubtitle("subtitle");
+        book.setTitle("title");
+        book.setYear(2000);
+
+        bookDao.save(book);
 
         List<Book> books = bookDao.getAll();
 
