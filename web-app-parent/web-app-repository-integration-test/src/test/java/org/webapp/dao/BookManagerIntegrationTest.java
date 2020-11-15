@@ -57,7 +57,7 @@ public class BookManagerIntegrationTest {
 
         Book book = new Book();
 //        long id = RandomUtils.nextLong();
-//        book.setId(id);
+        book.setId(1872635L);
         book.setAuthor("author");
         book.setDescription("description");
         book.setDownload("download");
