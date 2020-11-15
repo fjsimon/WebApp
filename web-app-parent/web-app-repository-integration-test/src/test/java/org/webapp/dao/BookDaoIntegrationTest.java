@@ -1,6 +1,7 @@
 package org.webapp.dao;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.nullValue;
 
+@Ignore
 @SpringBootTest
 @ActiveProfiles({"hibernate", "test"})
 @RunWith(SpringJUnit4ClassRunner.class)

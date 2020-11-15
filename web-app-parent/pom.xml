@@ -17,7 +17,7 @@
         <module>web-app-repository</module>
         <module>web-app-repository-integration-test</module>
         <module>web-app-service</module>
-        <module>web-app-controller</module>
+<!--        <module>web-app-controller</module>/-->
     </modules>
 
     <build>
