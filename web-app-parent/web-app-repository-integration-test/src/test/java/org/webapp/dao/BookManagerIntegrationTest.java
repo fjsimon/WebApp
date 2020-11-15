@@ -66,7 +66,7 @@ public class BookManagerIntegrationTest {
         book.setPublisher("publisher");
         book.setSubtitle("subtitle");
         book.setTitle("title");
-        book.setYear(2100);
+//        book.setYear(2100);
 
         Book createdBook = bookManager.save(book);
         long id = createdBook.getId();
