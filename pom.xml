@@ -47,6 +47,7 @@
 					<timestampedReports>false</timestampedReports>
 					<outputFormats>
 						<outputFormat>HTML</outputFormat>
+						<outputFormat>XML</outputFormat>
 					</outputFormats>
 					<failWhenNoMutations>false</failWhenNoMutations>
 				</configuration>
